@@ -20,58 +20,50 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
   
 # 2. RabbitMQ常用消息传输模式
 ## 2.1 最简单的Producer-Consumer机制
-  
-     
+       
 ![producer-consumer messaging](/assets/rabbitcluster/pc.png)<br>
    fig.1 procuder-consumer messaging  
-<p>  
-   P(生产者)发送数据到RabbitMQ的一个队列上，C(消费者)在这个队列上等待消息的到来；  
-</p>  
+   P(生产者)发送数据到RabbitMQ的一个队列上，C(消费者)在这个队列上等待消息的到来
   
 ## 2.2 Work Queues机制
   
 ![work-queue](/assets/rabbitcluster/work_queue.png)<br>
-   fig.2 work-queue messaging  
-<p>  
-   P(生产者)发送数据到RabbitMQ的一个队列上，多个消费者(C1,C2)共享这个队列中的消息。  
-   队列中的消息以Round-Robin的方式分别被POP给C1,C2;  
-</p>  
+   fig.2 work-queue messaging
+   
+   P(生产者)发送数据到RabbitMQ的一个队列上，多个消费者(C1,C2)共享这个队列中的消息。
+   队列中的消息以Round-Robin的方式分别被POP给C1,C2;
   
 ## 2.3 Pub-Sub机制
   
 ![pub-sub](/assets/rabbitcluster/pub_sub.png)<br>
    fig.3 publish-subcribe messaging  
-<p>  
-   P(生产者)不再直接发送数据到queue上，而是将数据发送到一个exchange上；这个exchange  
-   会根据一个预先设定的策略转发消息到对应的队列上(甚至丢弃一些消息）。  
-</p>  
+
+   P(生产者)不再直接发送数据到queue上，而是将数据发送到一个exchange上；这个exchange
+   会根据一个预先设定的策略转发消息到对应的队列上(甚至丢弃一些消息）。 
   
 ## 2.4 Routing机制
   
 ![routing](/assets/rabbitcluster/routing.png)<br>
   
-   fig.4 routing messaging  
-<p>  
-   在使用Routing机制进行消息传输的时候，exchange的类型应设为direct(定向);Publisher发送  
-   的每一个消息中都会带上一个Routine-Key,Queue和exchange之间进行绑定时，会注册对应的Routine-Key;  
-   如上图所示，Q2注册了black和green作为Routine-Key,所有Routine-Key为black或green的消息  
-   都会被发送到Q2队列。  
-</p>  
+   fig.4 routing messaging
+   
+   在使用Routing机制进行消息传输的时候，exchange的类型应设为direct(定向);Publisher发送 
+   的每一个消息中都会带上一个Routine-Key,Queue和exchange之间进行绑定时，会注册对应的Routine-Key; 
+   如上图所示，Q2注册了black和green作为Routine-Key,所有Routine-Key为black或green的消息 
+   都会被发送到Q2队列。 
   
 # 2.5 Topics机制
 
 ![topics](/assets/rabbitcluster/topics.png)<br>
   
-   fig.5 topics messaging  
+   fig.5 topics messaging 
   
-<p>  
-   在使用Topics机制进行消息传输的时候，exchange的类型应设为topic(主题);Queue通过配符的方式和  
-   exchange之间绑定Routine-Key;通配符的意义：  
-     \* : 代替一个单词   
-     \# : 代替0个或多个单词  
-   如上图所示，*.orange.*表示Q1会接受任何“三个word,并且中间一个为orange”的Routine-Key的消息；  
-   如"lazay.orange.fox".  
-</p>  
+   在使用Topics机制进行消息传输的时候，exchange的类型应设为topic(主题);Queue通过配符的方式和
+   exchange之间绑定Routine-Key;通配符的意义:__
+   ..* \* : 代替一个单词   
+   ..* \# : 代替0个或多个单词  
+   如上图所示，*.orange.*表示Q1会接受任何“三个word,并且中间一个为orange”的Routine-Key的消息；
+   如"lazay.orange.fox".
   
 # 3. High Availiable RabbitMQ Cluster构建
 ## 3.1 rabbitmq集群通过queue mirroring实现高可用原理
