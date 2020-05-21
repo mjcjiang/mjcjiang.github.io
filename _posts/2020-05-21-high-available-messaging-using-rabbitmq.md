@@ -80,7 +80,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
 # 3. High Availiable RabbitMQ Cluster构建
 ## 3.1 rabbitmq集群通过queue mirroring实现高可用原理
   
-![morroring queue](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/queue_mirror.png)<br>
+![morroring queue](/assets/rabbitcluster/queue_mirror.png)<br>
    Fig.6 queue mirroring  
   
 <p>  
