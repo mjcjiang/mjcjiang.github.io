@@ -58,8 +58,8 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
   
    在使用Topics机制进行消息传输的时候，exchange的类型应设为topic(主题);Queue通过配符的方式和
    exchange之间绑定Routine-Key;通配符的意义  
-   ..* \* : 代替一个单词   
-   ..* \# : 代替0个或多个单词  
+   * \* : 代替一个单词
+   * \# : 代替0个或多个单词
    如上图所示，*.orange.*表示Q1会接受任何“三个word,并且中间一个为orange”的Routine-Key的消息；
    如"lazay.orange.fox".
   
