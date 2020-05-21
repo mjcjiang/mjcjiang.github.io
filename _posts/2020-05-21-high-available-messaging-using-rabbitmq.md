@@ -117,11 +117,10 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
 
 ![mirrored queues](/assets/rabbitcluster/mirror_queues.png)<br>
   Fig.11 add a mirrored queue  
-<p>
-  ha-params = 3:             一个master queue, 两个slave queuue;  
-  ha-sync-mode = automatic:  slave queue自动同步master queue;  
-  state = idle:              当前queues处于闲置状态，没有数据被写入  
-</p>  
+
+..*: ha-params = 3:             一个master queue, 两个slave queuue;  
+..*: ha-sync-mode = automatic:  slave queue自动同步master queue;  
+..*: state = idle:              当前queues处于闲置状态，没有数据被写入  
   
 ## 场景1: 只有Produer, 没有Consumer, 写入10w条1k大小消息：
 <p>  
