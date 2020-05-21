@@ -6,11 +6,11 @@
   
   本文以RabbitMQ为核心构件，设计并实现一个支持可靠消息通信的节点集群；并在此基础上统计集
 群的最大消息吞吐量和消息平均延迟。本文主要就以下几个方面展开描述：  
-..* RabbitMQ简介  
-..* RabbitMQ常用消息传输模式  
-..* RabbitMQ构件集群实践，以及对集群如何实现高可用展开描述  
-..* 集群性能测试  
-..* 结论  
++ RabbitMQ简介
++ RabbitMQ常用消息传输模式
++ RabbitMQ构件集群实践，以及对集群如何实现高可用展开描述
++ 集群性能测试
++ 结论
   
 # 1. What is RabbitMQ?
 RabbitMQ是一个开源的消息消息代理(message-broker)软件，起初支持AMQP(Advanced Message
