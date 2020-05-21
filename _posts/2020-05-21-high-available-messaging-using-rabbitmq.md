@@ -59,7 +59,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
    fig.5 topics messaging 
   
    在使用Topics机制进行消息传输的时候，exchange的类型应设为topic(主题);Queue通过配符的方式和
-   exchange之间绑定Routine-Key;通配符的意义:__
+   exchange之间绑定Routine-Key;通配符的意义  
    ..* \* : 代替一个单词   
    ..* \# : 代替0个或多个单词  
    如上图所示，*.orange.*表示Q1会接受任何“三个word,并且中间一个为orange”的Routine-Key的消息；
@@ -71,43 +71,34 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
 ![morroring queue](/assets/rabbitcluster/queue_mirror.png)<br>
    Fig.6 queue mirroring  
   
-<p>  
-   一笔消息进入RabbitMQ集群后，会先被写入到master queue中，同时每个slave queue开始  
-   对这笔消息进行同步，只有当所有slave queues完成同步之后，集群才会给客户端返回消息  
-   响应。客户端未收到当前的消息响应之前，不会发送下一笔消息。这样就保证了集群中所有  
-   节点上queue的消息内容和顺序完全相同。同时，当master queue所在节点failover时，任何  
-   一个同步完成的queue都可以升级为master queue.  
-</p>  
+   一笔消息进入RabbitMQ集群后，会先被写入到master queue中，同时每个slave queue开始
+   对这笔消息进行同步，只有当所有slave queues完成同步之后，集群才会给客户端返回消息
+   响应。客户端未收到当前的消息响应之前，不会发送下一笔消息。这样就保证了集群中所有
+   节点上queue的消息内容和顺序完全相同。同时，当master queue所在节点failover时，任何
+   一个同步完成的queue都可以升级为master queue.
   
-<p>  
-   利用上述原理，还可以实现多主题消息定序。以交易系统最常见的买卖订单为例，假定目前  
-   存在两个主题order.sell和order.buy。可以使用2.5中的topics机制，在exchange和queue  
-   之间用order.*作为Routine-Key进行绑定。所有以order.sell和order.buy为routine-key  
-   的消息都会被发送到这个队列上。下面是两笔消息的时序图：  
-</p>  
+   利用上述原理，还可以实现多主题消息定序。以交易系统最常见的买卖订单为例，假定目前
+   存在两个主题order.sell和order.buy。可以使用2.5中的topics机制，在exchange和queue
+   之间用order.*作为Routine-Key进行绑定。所有以order.sell和order.buy为routine-key
+   的消息都会被发送到这个队列上。下面是两笔消息的时序图:
   
 ![two orders arrive in a rabbitmq cluster](/assets/rabbitcluster/two_orders.png)<br>
-   Fig.7 two orders enter rabbitmq cluster  
-  
-<p>  
-   如上图所示，两笔消息的顺序在master queue和各slave queue上始终是一致的。  
-</p>  
+   Fig.7 two orders enter rabbitmq cluster
+     
+   如上图所示，两笔消息的顺序在master queue和各slave queue上始终是一致的。
   
 ## 3.2 集群构建实践
-<p>  
    本文中的样例搭建在LAN中的三台主机上，主机信息如下：<br>  
    | Linux hjiang-HP 5.3.0-18-generic #19-Ubuntu SMP Tue Oct 8 20:14:06 UTC 2019 x86_64 x86_64 x86_64 GNU/                |<br>  
    | Linux xiufuzhang 5.3.0-51-generic #44~18.04.2-Ubuntu SMP Thu Apr 23 14:27:18 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux |<br>  
    | Linux nsxia 4.15.0-91-generic #92-Ubuntu SMP Fri Feb 28 11:09:48 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux             |<br>  
-</p>  
   
-<p>  
    三台主机上运行的rabbitmq版本保持一致：  
   
 ![rabbit version](/assets/rabbitcluster/rabbit_version.png)<br>
-   Fig.8 rabbitmq version  
+   Fig.8 rabbitmq version
   
-   集群的构建过程请参见官方文档：https://www.rabbitmq.com/clustering.html ;这里不做赘述。  
+   集群的构建过程请参见官方文档：https://www.rabbitmq.com/clustering.html ;这里不做赘述。
   
    集群构建完成后，在任意一台主机上察看集群情况：  
    $rabbitmqctl cluster_status  
@@ -118,7 +109,6 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
    同时每台主机在http://localhost:15672 上开放HTTP管理界面，如下：  
 ![http monitor](/assets/rabbitcluster/rabbit_http_monitor.png)<br>
    Fig. 10 http monitor page  
-</p>  
   
 # 4. 性能测试
 <p>  
