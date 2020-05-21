@@ -181,14 +181,11 @@ func failOnError(err error, msg string) {
 	}  
 }  
 ``` 
-<p>  
    运行4次测试程序，每次都发送10w条1k的消息：  
-  
-![bench 1w message in 1k size](/assets/rabbitcluster/bench_10k_1.png)<br>
+   ![bench 1w message in 1k size](/assets/rabbitcluster/bench_10k_1.png)<br>
    Fig.12 benchmark 1  
   
    在场景1下，可以实现 4w笔/秒 的消息写入。  
-</p>  
   
 ## 场景2: 单Producer, 单Consumer, 写入10w条1k大小消息：
 <p>  
