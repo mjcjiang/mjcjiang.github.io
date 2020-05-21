@@ -50,7 +50,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
    如上图所示，Q2注册了black和green作为Routine-Key,所有Routine-Key为black或green的消息 
    都会被发送到Q2队列。 
   
-# 2.5 Topics机制
+## 2.5 Topics机制
 
 ![topics](/assets/rabbitcluster/topics.png)<br>
   
@@ -86,10 +86,10 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。
    如上图所示，两笔消息的顺序在master queue和各slave queue上始终是一致的。
   
 ## 3.2 集群构建实践
-   本文中的样例搭建在LAN中的三台主机上，主机信息如下：<br>  
-   | Linux hjiang-HP 5.3.0-18-generic #19-Ubuntu SMP Tue Oct 8 20:14:06 UTC 2019 x86_64 x86_64 x86_64 GNU/                |<br>  
-   | Linux xiufuzhang 5.3.0-51-generic #44~18.04.2-Ubuntu SMP Thu Apr 23 14:27:18 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux |<br>  
-   | Linux nsxia 4.15.0-91-generic #92-Ubuntu SMP Fri Feb 28 11:09:48 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux             |<br>  
+   本文中的样例搭建在LAN中的三台主机上，主机信息如下：<br>
+   * Linux hjiang-HP 5.3.0-18-generic #19-Ubuntu SMP Tue Oct 8 20:14:06 UTC 2019 x86_64 x86_64 x86_64 GNU
+   * Linux xiufuzhang 5.3.0-51-generic #44~18.04.2-Ubuntu SMP Thu Apr 23 14:27:18 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+   * Linux nsxia 4.15.0-91-generic #92-Ubuntu SMP Fri Feb 28 11:09:48 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
   
    三台主机上运行的rabbitmq版本保持一致：  
   
@@ -246,14 +246,10 @@ func failOnError(err error, msg string) {
 ![context 2](/assets/rabbitcluster/one_p_one_c.png)<br>
    Fig.13 benchmark 2  
   
-<p>  
    在场景2下，写入吞吐量上升到 7w笔/秒。  
-</p>  
   
 ## 场景3: 单Producer, 单Consumer, 写入10w条1k大小消息，计算消息平均时延：
-<p>  
  发送方代码，将发送时间戳带入消息体：  
-</p>  
   
 ``` go
 start := time.Now()  
@@ -277,9 +273,7 @@ for i := 1; i <= msgnum; i++ {
 	time.Sleep(time.Millisecond * 1)  
 }  
 ``` 
-<p>  
  接收方代码，提取消息体中的时间戳，计算和当前时间戳的差值，即消息时延。  
-</p>  
   
 ``` go
 go func() {  
@@ -295,14 +289,12 @@ go func() {
 	}  
 }()  
 ``` 
-<p>  
   最终测得10笔消息的平均时间延迟为300us左右。  
   tips: 发送方间隔1ms发送一笔消息，否则rabbitmq会因为负载过大导致延迟巨增！  
-</p>  
   
 # 5. 结论
-<p>  
-  本文实现了一个在LAN集群中部署RabbitMQ高可用消息传输集群的方案；实现消息的多主机备份，  
-单主题和多主题的消息定序等高可用核心功能；在1000Mb/s的局域网中可以实现4w/s以上,1Kb大小的  
-消息传输，消息传输时延控制在300us左右；在万兆网上的传输时间延可以更低。  
-</p>  
+
+  本文实现了一个在LAN集群中部署RabbitMQ高可用消息传输集群的方案；实现消息的多主机备份，
+单主题和多主题的消息定序等高可用核心功能；在1000Mb/s的局域网中可以实现4w/s以上,1Kb大小的
+消息传输，消息传输时延控制在300us左右；在万兆网上的传输时间延可以更低。 
+
