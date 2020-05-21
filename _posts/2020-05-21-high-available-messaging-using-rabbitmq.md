@@ -80,7 +80,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
 # 3. High Availiable RabbitMQ Cluster构建
 ## 3.1 rabbitmq集群通过queue mirroring实现高可用原理
   
-![morroring queue](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/queue_mirror.png)<br>
+![morroring queue](/assets/rabbitcluster/queue_mirror.png)<br>
    Fig.6 queue mirroring  
   
 <p>  
@@ -98,7 +98,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
    的消息都会被发送到这个队列上。下面是两笔消息的时序图：  
 </p>  
   
-![two orders arrive in a rabbitmq cluster](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/two_orders.png)<br>
+![two orders arrive in a rabbitmq cluster](/assets/rabbitcluster/two_orders.png)<br>
    Fig.7 two orders enter rabbitmq cluster  
   
 <p>  
@@ -116,7 +116,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
 <p>  
    三台主机上运行的rabbitmq版本保持一致：  
   
-![rabbit version](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/rabbit_version.png)<br>
+![rabbit version](/assets/rabbitcluster/rabbit_version.png)<br>
    Fig.8 rabbitmq version  
   
    集群的构建过程请参见官方文档：https://www.rabbitmq.com/clustering.html ;这里不做赘述。  
@@ -124,11 +124,11 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
    集群构建完成后，在任意一台主机上察看集群情况：  
    $rabbitmqctl cluster_status  
   
-![rabbit cluster status](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/rabbit_cluster_status.png)<br>
+![rabbit cluster status](/assets/rabbitcluster/rabbit_cluster_status.png)<br>
    Fig.9 rabbitmq cluster status   
      
    同时每台主机在http://localhost:15672 上开放HTTP管理界面，如下：  
-![http monitor](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/rabbit_http_monitor.png)<br>
+![http monitor](/assets/rabbitcluster/rabbit_http_monitor.png)<br>
    Fig. 10 http monitor page  
 </p>  
   
@@ -137,7 +137,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
   在集群上添加mirrored queues, 信息如下：  
 </p>
 
-![mirrored queues](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/mirror_queues.png)<br>
+![mirrored queues](/assets/rabbitcluster/mirror_queues.png)<br>
   Fig.11 add a mirrored queue  
 <p>
   ha-params = 3:             一个master queue, 两个slave queuue;  
@@ -209,7 +209,7 @@ func failOnError(err error, msg string) {
 <p>  
    运行4次测试程序，每次都发送10w条1k的消息：  
   
-![bench 1w message in 1k size](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/bench_10k_1.png)<br>
+![bench 1w message in 1k size](/assets/rabbitcluster/bench_10k_1.png)<br>
    Fig.12 benchmark 1  
   
    在场景1下，可以实现 4w笔/秒 的消息写入。  
@@ -271,7 +271,7 @@ func failOnError(err error, msg string) {
 ``` 
    运行4次测试程序，每次都发送10w条1k的消息：  
   
-![context 2](https://github.com/hjiangsse/orgnization/tree/master/personal_writ/rabbitcluster/one_p_one_c.png)<br>
+![context 2](/assets/rabbitcluster/one_p_one_c.png)<br>
    Fig.13 benchmark 2  
   
 <p>  
