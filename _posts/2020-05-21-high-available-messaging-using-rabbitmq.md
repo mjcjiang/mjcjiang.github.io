@@ -26,7 +26,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
 ## 2.1 最简单的Producer-Consumer机制
   
      
-![producer-consumer messaging](https://github.com/hjiangsse/Org/blob/master/personal_write/rabbitcluster/pc.png)<br>
+![producer-consumer messaging](/assets/rabbitcluster/pc.png)<br>
    fig.1 procuder-consumer messaging  
 <p>  
    P(生产者)发送数据到RabbitMQ的一个队列上，C(消费者)在这个队列上等待消息的到来；  
@@ -34,7 +34,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
   
 ## 2.2 Work Queues机制
   
-![work-queue](https://github.com/hjiangsse/Org/blob/master/personal_write/rabbitcluster/work_queue.png)<br>
+![work-queue](/assets/rabbitcluster/work_queue.png)<br>
    fig.2 work-queue messaging  
 <p>  
    P(生产者)发送数据到RabbitMQ的一个队列上，多个消费者(C1,C2)共享这个队列中的消息。  
@@ -43,7 +43,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
   
 ## 2.3 Pub-Sub机制
   
-![pub-sub](https://github.com/hjiangsse/Org/blob/master/personal_write/rabbitcluster/pub_sub.png)<br>
+![pub-sub](/assets/rabbitcluster/pub_sub.png)<br>
    fig.3 publish-subcribe messaging  
 <p>  
    P(生产者)不再直接发送数据到queue上，而是将数据发送到一个exchange上；这个exchange  
@@ -52,7 +52,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
   
 ## 2.4 Routing机制
   
-![routing](https://github.com/hjiangsse/Org/blob/master/personal_write/rabbitcluster/routing.png)<br>
+![routing](/assets/rabbitcluster/routing.png)<br>
   
    fig.4 routing messaging  
 <p>  
@@ -64,7 +64,7 @@ RabbitMQ现在已经实现对大部分开发语言的客户端支持。</p>
   
 # 2.5 Topics机制
 
-![topics](https://github.com/hjiangsse/Org/blob/master/personal_write/rabbitcluster/topics.png)<br>
+![topics](/assets/rabbitcluster/topics.png)<br>
   
    fig.5 topics messaging  
   
