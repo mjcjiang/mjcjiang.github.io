@@ -145,7 +145,7 @@ name     time/op
 Fib20-8  25.6µs ± 0%
 ``` 
 the benching is very stable.
-## 5. improve the benched function, then do benching again
+## 5. improve function performance, then do benching again
 we hard code another number from the fibonacci series, reduce the depth of each recusive call by one.
 ``` go
 func Fib3(n int) int {
