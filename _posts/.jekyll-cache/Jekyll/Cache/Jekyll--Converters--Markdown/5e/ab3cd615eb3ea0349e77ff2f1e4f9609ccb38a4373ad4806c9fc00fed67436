@@ -1,0 +1,13 @@
+I"Ñ<p>This is the first post i published on the web! so it is just used to do some testing work.<br />
+Now letâ€™s get in:</p>
+
+<p>i insert a code snippet here:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="s">"fmt"</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"This is just golang code snippet"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET
