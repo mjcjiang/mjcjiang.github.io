@@ -175,25 +175,25 @@ We can read a block of characters in one system call thus reduce the total syste
 the file. first we set the read block size as 1K(1024 Bytes):
 ``` go
 var bytes [1024]byte
-	b := bufio.NewReader(f)
-	for {
-		n, err := b.Read(bytes[:])
-		if err == io.EOF {
-			break
-		}
-
-		if err != nil {
-			log.Fatalf("could not read file %v: %v", os.Args[1], err)
-		}
-
-		for i := 0; i < n; i++ {
-			if unicode.IsSpace(rune(bytes[i])) && inword {
-				words++
-				inword = false
-			}
-			inword = unicode.IsLetter(rune(bytes[i]))
-		}
+b := bufio.NewReader(f)
+for {
+	n, err := b.Read(bytes[:])
+	if err == io.EOF {
+		break
 	}
+	
+	if err != nil {
+		log.Fatalf("could not read file %v: %v", os.Args[1], err)
+	}
+
+	for i := 0; i < n; i++ {
+	if unicode.IsSpace(rune(bytes[i])) && inword {
+		words++
+		inword = false
+		}
+		inword = unicode.IsLetter(rune(bytes[i]))
+	}
+}
 ``` 
 now the syscall time cosumption is much smaller:
 
