@@ -19,6 +19,7 @@ The time line of Go GC design change:
 + Go 1.10+, move away from pure cooprerative goroutine scheduling to lower the 
   latency when triggering a full GC cycle.
 + Go 1.13 Scavenger rewritten
+
 ## 2. Tune GC
 There is a environment variable GOGC, and the formula for GOGC is:
 
@@ -48,18 +49,19 @@ The privious command set gctrace on when running *godoc* program. The GC logging
  Fig 2. GC logging
 
  Search document of runtime package get:
- gc # @#s #%: #+#+# ms clock, #+#/#/#+# ms cpu, #->#-># MB, # MB goal, # P
+ *gc # @#s #%: #+#+# ms clock, #+#/#/#+# ms cpu, #->#-># MB, # MB goal, # P*
  where the fields are as follows:
  + gc #        the GC number, incremented at each GC
  + @#s         time in seconds since program start
  + #%          percentage of time spent in GC since program start
  + #+...+#     wall-clock/CPU times for the phases of the GC
  + #->#-># MB  heap size at GC start, at GC end, and live heap
- + # MB goal   goal heap size
- + # P         number of processors used
+ + *# MB goal*   goal heap size
+ + *# P*         number of processors used
 
- When you know your program has a GC problem, use *GODEBUG=gctrace=1* is a good
- way, but for general telemetry the "net/http/pprof" is much useful.
+When you know your program has a GC problem, use *GODEBUG=gctrace=1* is a good
+way, but for general telemetry the "net/http/pprof" is much useful.
+
 ### 3.2 use *net/http/pprof*
 We use a simple program to demonstrate how to use *net/http/pprof*, and why it 
 is a *holy grail* to monitor your online program:
@@ -106,7 +108,7 @@ Use command line get profile message:
   - go tool pprof http://localhost:6060/debug/pprof/mutex 
   
 ## 4. Tech to minimise memory allocation
-+ *string*s vs *[]byte*s
++ *string*s vs *[]byte*s  
 Avoid *[]byte* and string conversions whenever possible. But why?
 In Go []byte is mutable, string is immutable. Most programs prefer
 to work with string, but most IO is done with []byte. when you really
