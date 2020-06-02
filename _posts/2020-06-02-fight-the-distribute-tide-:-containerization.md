@@ -146,3 +146,24 @@ $sudo docker run -it --rm --name my-running-app hello-golang
 
 + --rm: Automatically remove the container when it exits
 + --name: Assign a name to the container
+
+## 3. Share your images
+We you build out an image, you can share it with other people. The
+following show how to share your images to Docker Hub.
+
++ Setup Docker Hub account
++ Tag your image
+```
+$ sudo docker tag hello-golang redmagic039/hello-golang
+```
++ Login to Docker Hub
+```
+$ sudo docker login
+```
++ Push image
+```
+$ sudo docker push redmagic039/hello-golang:1.0
+```
+
+Containeriztion and Images make a new program and deployment style.
+Some great distributed builds can be builded on this basement.
