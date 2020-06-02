@@ -147,7 +147,44 @@ $sudo docker run -it --rm --name my-running-app hello-golang
 + --rm: Automatically remove the container when it exits
 + --name: Assign a name to the container
 
-## 3. Share your images
+## 3. build multi-stage image(shrink image size)
+In the previous example, we build the image *hello-golang* above *golang:1.14* image,
+which include all the golang tools(which is quite large). This will slow down our
+image deployment.
+
+![Only one stage](/assets/docker/one-stage.png)  
+Fig 3. One stage image size
+
+Holy shit! more than 800MB! What a pity!
+
+We use a multi-stage Dockerfile as following:
+```
+# STAGE 1: Build
+FROM golang:1.14 AS build
+
+WORKDIR /go/src/app
+COPY . .
+
+RUN go build -o stage
+
+# STAGE 2: Deployment
+FROM alpine
+
+USER nobody:nobody
+COPY --from=build /go/src/app/stage /stage
+CMD ["/stage"]
+```
+
++ AS build: the first stage, build out the app;
++ Deployment: copy the app from the first stage, and leave out all the things first stage contains;
+
+Build out the new image and check the size:
+![Multi Stage](/assets/docker/mul-stage.png)  
+Fig 4. Multi-Stage image size
+
+What a huge shrinking!!! Ho,ho,ho!!!
+
+## 4. Share your images
 We you build out an image, you can share it with other people. The
 following show how to share your images to Docker Hub.
 
