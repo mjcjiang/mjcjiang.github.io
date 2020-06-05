@@ -1,4 +1,5 @@
-# Type in Haskell : Some good taste in your mouth
+Type in Haskell : Some good taste in your mouth
+
 ## 1. Taste the haskell static type system
 Because haskell is a purely language, all computation are done via eval expressions
 and yeild values. And haskell is a strong typed language, every value has an associated
