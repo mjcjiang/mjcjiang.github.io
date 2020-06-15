@@ -106,6 +106,7 @@ then sequencing it.
   mapM_: just do not care the sequce of I/O result;
 + forever: repeat I/O action forever;
 + forM: make an I/O action for every element in this list. 
+
 ```
 import Control.Monad  
       
