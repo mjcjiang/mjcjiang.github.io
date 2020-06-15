@@ -33,18 +33,18 @@ carry out some side effect, like eat up some input or run out some
 output.
 
 So, you may ask when the IO action happen? This is why main comes in.
-Give your *IO* action(s) a name main, then run the program.
+Give your I/O action(s) a name main, then run the program.
 
 You can also use *do* keyword to concatenate multipule *IO* actions
-as \"one\" *IO* action:
+as \"one\" I/O action:
 ```
 main = do
   putStrLn "Who are you?"
   name <- getLine
   putStrLn ("Fine, thank " ++ name ++ " Bye!")
 ```
-The privious do concat one *input I/O* and two *output I/O* as one.
-The *do* will use the *I/O* result of the last *I/O* as its *I/O* result.
+The privious do concat one input I/O and two output I/O as one.
+The *do* will use the I/O result of the last I/O as its I/O result.
 
 Let\'s inspect the more interesting *getLine*.
 ```
