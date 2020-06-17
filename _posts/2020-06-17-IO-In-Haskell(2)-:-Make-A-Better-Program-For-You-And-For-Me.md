@@ -179,4 +179,129 @@ dispatch =  [ ("add", add)
 Program check the first argument to find the action it will take.
 
 # 3. Throw your dices in haskell: Randomness
+What make haskell standing out is its pure functional character, this
+promise that you can't get different results after calling a function
+with the same parameter twices. But it can't deal with randomness, the
+same function will return different results in different time.
 
+Enter the *System.Random* module, it has all the functions that satisfy
+our need for randomness. The first actor is *random* function:
+```
+Prelude System.Random> :t random
+random :: (Random a, RandomGen g) => g -> (a, g)
+```
++ RandomGen: typeclass is for types that can act as sources of randomness.
++ Random: typeclass is for things that can take on random values. A boolean
+value can take on a random value, namely *True* and *False*. A number can 
+also take on a random value. We can translate the signature of *random* as
+following: *it takes a random generator and return a random value and a new random
+generator*.
+
+```
+Prelude System.Random> random (mkStdGen 1000)
+(1611434616111168504,1261958764 2103410263)
+Prelude System.Random> random (mkStdGen 1000) :: (Integer, StdGen)
+(1611434616111168504,1261958764 2103410263)
+Prelude System.Random> random (mkStdGen 1000) :: (Bool, StdGen)
+(True,40054014 40692)
+Prelude System.Random> random (mkStdGen 1000) :: (Bool, StdGen)
+(True,40054014 40692)
+Prelude System.Random> random (mkStdGen 1000) :: (Float, StdGen)
+(0.8345514,698578198 1655838864)
+```
+*StdGen* is an instance of RandomGen class, *mkStdGen* takes a integer and 
+return an random generator.
+
+Let\'s see a real world example, throw a dice three times:
+```
+threeCoins :: StdGen -> (Bool, Bool, Bool)  
+threeCoins gen =   
+    let (firstCoin, newGen) = random gen  
+        (secondCoin, newGen') = random newGen  
+        (thirdCoin, newGen'') = random newGen'  
+    in  (firstCoin, secondCoin, thirdCoin)
+```
+See the newGen, newGen' and newGen'', A ha! This why *random* return 
+a random value and a new Randomness Generator!!! We use *stack* build
+a real example:
+
+```
+$ stack new random-project
+```
+The tree of the *random project*:
+
+```
+.
+├── app
+│   └── Main.hs
+├── ChangeLog.md
+├── LICENSE
+├── package.yaml
+├── random-project.cabal
+├── README.md
+├── Setup.hs
+├── src
+│   └── Lib.hs
+├── stack.yaml
+├── stack.yaml.lock
+└── test
+    └── Spec.hs
+```
+
+We define our coin function in Lib.hs:
+```
+module Lib
+    ( someFunc,
+      randomTest
+    ) where
+
+import System.Random
+
+someFunc :: IO ()
+someFunc = putStrLn "someFunc"
+
+threeCoins :: StdGen -> (Bool, Bool, Bool)
+threeCoins gen =
+  let (firstCoin, newGen) = random gen
+      (secondCoin, newGen') = random newGen
+      (thirdCoin, newGen'') = random newGen'
+  in (firstCoin, secondCoin, thirdCoin)
+
+randomTest :: Int -> IO ()
+randomTest seed = do
+  let (first, second, third) = threeCoins (mkStdGen seed)
+  putStrLn (show first)
+  putStrLn (show second)
+  putStrLn (show third)
+```
+In *Main.hs* we read the command line argument, and execute coin
+throwing:
+```
+module Main where
+
+import Lib
+import System.Environment
+
+main :: IO ()
+main = do
+  (seed:xs) <- getArgs
+  randomTest (read seed)
+```
+Build and run with different arguments:
+```
+$ stack exec random-project-exe 100
+True
+False
+False
+
+$ stack exec random-project-exe 101
+True
+True
+True
+
+$ stack exec random-project-exe 102
+True
+True
+True
+```
+We just use the command line toolkit in the 2th section!!!
