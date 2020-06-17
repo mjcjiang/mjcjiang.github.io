@@ -306,3 +306,47 @@ True
 True
 ```
 We just use the command line toolkit in the 2th section!!!
+
+## 3.1 Some other randomness generators
++ randoms, takes a generator and returns an infinite sequnce of values based
+on that generator.
+
+```
+Prelude System.Random> take 5 $ randoms (mkStdGen 10) :: [Bool]
+[True,True,True,False,True]
+Prelude System.Random> take 5 $ randoms (mkStdGen 10) :: [Int]
+[-2774747785423059091,-5364865979222864935,5005192715100199576,-2238708107678760508,-1609484772912886991]
+Prelude System.Random> take 5 $ randoms (mkStdGen 10) :: [Float]
+[3.2916963e-2,0.4914012,1.799494e-2,0.66797864,0.6756661]
+```
+
++ randomR: get a random value in some sort of range;
++ randomRs: generate a stream of random values within our defined ranges;
+
+## 3.2 Randomness and I/O
+*System.Random* offers the *getStdGen* I/O action. When your program starts, 
+it asks the system for a good random number generator and stores that in a 
+so called global generator. getStdGen fetches you that global random generator 
+when you bind it to something. 
+
+Let\'s see a program:
+```
+genRandomStr :: Int -> IO ()
+genRandomStr len = do
+  gen <- getStdGen
+  putStr $ take 20 (randomRs ('a', 'z') gen)
+```
+rock it out:
+```
+$ stack exec random-project-exe 
+ettknlgfiriaulasahsq
+$ stack exec random-project-exe
+zppxvaxxkkzibvfijtyj
+$ stack exec random-project-exe
+ajgggydmfxzjoltqdxrc
+```
+Each time we get a different random generator.
+
+# 4. The end
+We explore something about haskell command line and Randomness.
+I'm tierd now! It's your turn to jump to the stage!!! Come on!!
