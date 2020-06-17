@@ -222,8 +222,9 @@ threeCoins gen =
     in  (firstCoin, secondCoin, thirdCoin)
 ```
 See the newGen, newGen' and newGen'', A ha! This why *random* return 
-a random value and a new Randomness Generator!!! We use *stack* build
-a real example:
+a random value and a new Randomness Generator!!! 
+
+We use *stack* build a real example:
 
 ```
 $ stack new random-project
