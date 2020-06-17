@@ -49,7 +49,7 @@ main = do
   removeFile "todo.txt"
   renameFile tempName "todo.txt"
 ```
-Holy shit!!! What a big mess! Don't worry, let\'s dig into the program line by line, i
+Holy shit!!! What a big mess! Don\'t worry, let\'s dig into the program line by line, i
 translate the program into a small poem:
 ```
 Open and handle your old todo list
@@ -180,8 +180,8 @@ Program check the first argument to find the action it will take.
 
 # 3. Throw your dices in haskell: Randomness
 What make haskell standing out is its pure functional character, this
-promise that you can't get different results after calling a function
-with the same parameter twices. But it can't deal with randomness, the
+promise that you can\'t get different results after calling a function
+with the same parameter twices. But it can\'t deal with randomness, the
 same function will return different results in different time.
 
 Enter the *System.Random* module, it has all the functions that satisfy
@@ -221,7 +221,7 @@ threeCoins gen =
         (thirdCoin, newGen'') = random newGen'  
     in  (firstCoin, secondCoin, thirdCoin)
 ```
-See the newGen, newGen' and newGen'', A ha! This why *random* return 
+See the newGen, newGen\' and newGen\'\', A ha! This why *random* return 
 a random value and a new Randomness Generator!!! 
 
 We use *stack* build a real example:
@@ -349,4 +349,4 @@ Each time we get a different random generator.
 
 # 4. The end
 We explore something about haskell command line and Randomness.
-I'm tierd now! It's your turn to jump to the stage!!! Come on!!
+I\'m tierd now! It\'s your turn to jump to the stage!!! Come on!!
