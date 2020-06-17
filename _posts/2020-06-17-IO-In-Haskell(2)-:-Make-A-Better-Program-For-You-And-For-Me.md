@@ -55,13 +55,128 @@ translate the program into a small poem:
 Open and handle your old todo list
 Open an empty paper to record the new todo list
 Shake your old one and let us see your life history
-Tell us have finished what task?
-The finished is finished any way! don't think about it anymore!
+Tell us you have finished what task?
+The finished was finished any way! don't think about it anymore!
 Start your life in the next way!
 ```
 :), Speak in a sentence, it just delete the item you have finished!
-Then we look back, find some drawbacks of the previous programs. Why 
+
+Then we look back, try to find some drawbacks of the previous programs. Why 
 we hardcode the *todo.txt* into the program? If we have another todo
 list called "todo2.txt". (Too much work will kill you, take it easy, my friend!)
 Why we seperate the *adding* and *delete* actions into two program? 
 Stay safe! The holy *command line* will come home!!
+
+# 2. Haskell command line arguments
+The *System.Environment* module has two cool I/O actions:
++ getArgs: IO [String], get the arguments that the program was run with and have
+as its contained result a list with the arguments.
++ getProgName: Io String, a I/O action that contains the program name.
+
+```
+import System.IO
+import System.Environment
+import Data.List
+
+main = do
+  args <- getArgs
+  progName <- getProgName
+  putStrLn "The arguments are: "
+  putStrLn $ unlines (zipWith (\n arg -> show n ++ " : " ++ arg) [1..] args)
+  putStrLn "The name of the program is: "
+  putStrLn progName
+```
+Compile and run the program with arguments:
+```
+./manufile first second third
+The arguments are: 
+1 : first
+2 : second
+3 : third
+
+The name of the program is: 
+manufile
+```
+Wonderful(旺德福)！We get the arguments and progname! Now, make a salvage to
+the bad behavior we made in the 1th section!
+```
+import System.Environment   
+import System.Directory  
+import System.IO  
+import Data.List  
+  
+dispatch :: [(String, [String] -> IO ())]  
+dispatch =  [ ("add", add)  
+            , ("view", view)  
+            , ("remove", remove)  
+            ]  
+   
+main = do  
+    (command:args) <- getArgs  
+    let (Just action) = lookup command dispatch  
+    action args  
+  
+add :: [String] -> IO ()  
+add [fileName, todoItem] = appendFile fileName (todoItem ++ "\n")  
+  
+view :: [String] -> IO ()  
+view [fileName] = do  
+    contents <- readFile fileName  
+    let todoTasks = lines contents  
+        numberedTasks = zipWith (\n line -> show n ++ " - " ++ line) [0..] todoTasks  
+    putStr $ unlines numberedTasks  
+  
+remove :: [String] -> IO ()  
+remove [fileName, numberString] = do  
+    handle <- openFile fileName ReadMode  
+    (tempName, tempHandle) <- openTempFile "." "temp"  
+    contents <- hGetContents handle  
+    let number = read numberString  
+        todoTasks = lines contents  
+        newTodoItems = delete (todoTasks !! number) todoTasks  
+    hPutStr tempHandle $ unlines newTodoItems  
+    hClose handle  
+    hClose tempHandle  
+    removeFile fileName  
+    renameFile tempName fileName
+```
+Compile and do some test:
+```
+$ ./todo view todo.txt
+0 - 10:00 am coding to the next world
+1 - 10:00 am, hacking the haskell programming
+2 - 11:00 am, jumping and dancing
+3 - 14:00 pm, singing a song that no one else sing
+
+$ ./todo add todo.txt "15:30 pm, kick your ass"
+
+$ ./todo view todo.txt
+0 - 10:00 am coding to the next world
+1 - 10:00 am, hacking the haskell programming
+2 - 11:00 am, jumping and dancing
+3 - 14:00 pm, singing a song that no one else sing
+4 - 15:30 pm, kick your ass
+
+$ ./todo remove todo.txt 0
+$ ./todo view todo.txt
+0 - 10:00 am, hacking the haskell programming
+1 - 11:00 am, jumping and dancing
+2 - 14:00 pm, singing a song that no one else sing
+3 - 15:30 pm, kick your ass
+```
+First, we run *todo* program with *view* and *todo.txt*, it list out 
+our todo tasks with its index. Then, add a todo task into the list.
+Finally, delete the 0th task.
+
+```
+dispatch :: [(String, [String] -> IO ())]  
+dispatch =  [ ("add", add)  
+            , ("view", view)  
+            , ("remove", remove)  
+            ]  
+```
+*dispatch* is a associate list, map a *string* to a I/O function.
+Program check the first argument to find the action it will take.
+
+# 3. Throw your dices in haskell: Randomness
+
