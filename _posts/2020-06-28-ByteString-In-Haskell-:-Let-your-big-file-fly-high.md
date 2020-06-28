@@ -13,18 +13,18 @@ evaluated), so if your print one character a time in *contents*, the list will
 be evaluated *n* times, which *n* equals to the number of characters in the file.
 Use your toes to think, this is such a slow process when the file is bigger.
 
-# Data.ByteString : the strict guy
+# 1. Data.ByteString : the strict guy
 The *Data.ByteString* eliminate the laziness completely, it just stands a series
 of bytes in an array. A infinite strict bytestring? No such thing exists!!!
 It means you load all the contents of file into memory, when the file is big,
 this is always a problem.
 
-# Data.ByteString.Lazy : the new kind of laziness
+# 2. Data.ByteString.Lazy : the new kind of laziness
 The *lazy* version ByteString read 64KB contents into memory each time. This
 64KB ByteString is really a strict ByteString. But the contents of 64KB+ will
 not be evaluated until you really use them. It just like some reading buffer.
 
-# Compare *Normal File Process* and *Lazy File Process*
+# 3. Compare *Normal File Process* and *Lazy File Process*
 First, let\'s see how to reverse all lines in a file, using the normal method:
 ``` haskell
 import System.Environment
