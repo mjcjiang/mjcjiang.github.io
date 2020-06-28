@@ -1,4 +1,3 @@
-ByteString In Haskell: Let your big file fly high
 
 A normal routine when your want to read and process file in haskell is like:
 ``` haskell
