@@ -3,7 +3,7 @@ ation start, it always need load some data from disk to memory. When the file
 ize is small and number of files is rare, it has not much problem. But in most 
 context, the files are big and record in each file has different structure.
 If we load each file in a specific process, we have to write one function for 
-one file. It's a disaster when the number of files is big. In Go, we can use 
+one file. It\'s a disaster when the number of files is big. In Go, we can use 
 *reflect* to write a general file load function, what the user need is just:
 
 + the structure infomation of the record in the file
@@ -18,7 +18,7 @@ Tips:
 
 # 1. Util Function: Convert a string to a value of a specific type
 When we read a line of a file, what we get is just a byte slice(or string).
-This bytes of data is no meaning to us, if we can't transform it to the 
+This bytes of data is no meaning to us, if we can\'t transform it to the 
 specific type of data we want. So we must write a transform function:
 ```
 // convert a string to another type
