@@ -14,7 +14,7 @@ Now, begin the hacking journey!
 Tips:
 + all file in this article is text file
 + one line in file is a data record
-+ record field is seperated by '|' in file line
++ record field is seperated by \'|\' in file line
 
 # 1. Util Function: Convert a string to a value of a specific type
 When we read a line of a file, what we get is just a byte slice(or string).
