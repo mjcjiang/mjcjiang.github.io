@@ -247,5 +247,125 @@ print:
 t is now {77 Test}
 ```
 
-# 4. Conclusion
-Reflection is Conclusion!! Take it easy!
+# 4. Reflection and Slice
+Let\'s see a simple example, use reflection traverse two different type of
+slices.
+```
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func main() {
+	strArr := []string{"jim", "marry", "alon"}
+	testSliceReflect(strArr)
+	intArr := []int{1, 3, 2, 4}
+	testSliceReflect(intArr)
+}
+
+func testSliceReflect(t interface{}) {
+	switch reflect.TypeOf(t).Kind() {
+	case reflect.Slice:
+		s := reflect.ValueOf(t)
+
+		for i := 0; i < s.Len(); i++ {
+			fmt.Println(s.Index(i))
+		}
+	}
+}
+```
+First, use reflect.TypeOf(t).Kind() get the kind of object
+contained in the interface value. If it is a slice, no matter
+the type of elements in the slice, just print it out.
+
+Now, we begin to see a complicated example: pow a int slice
+```
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func main() {
+	foo := []int{1, 2, 3, 4, 5, 6}
+	testSliceReflectWrite(&foo)
+	fmt.Println(foo)
+}
+
+func intPow(i int) int {
+	return i * i
+}
+
+func testSliceReflectWrite(t interface{}) {
+	if reflect.TypeOf(t).Kind() != reflect.Ptr {
+		fmt.Println("parameter not a ptr")
+	}
+
+	s := reflect.ValueOf(t).Elem()
+	etype := reflect.TypeOf(s.Interface()).Elem()
+	tmp := reflect.New(etype).Elem()
+
+	for i := 0; i < s.Len(); i++ {
+		pow := intPow(int(s.Index(i).Int()))
+		tmp.Set(reflect.ValueOf(pow))
+		s.Index(i).Set(tmp)
+	}
+}
+```
+We pass a pointer to slice to the *testSliceReflectWrite*, so
+we can assign value to the element of the slice.
+
+First, *reflect.ValueOf(t)* get the value of t:
+```
+fmt.Printf("ps: %v\n", reflect.ValueOf(t))
+```
+print:
+```
+ps: &[1 2 3 4 5 6]
+```
+the value in the interface variable t is a slice pointer
+
+Next, *reflect.ValueOf(s).Elem()* get the value the pointer point to.
+Yes, it is the slice.
+```
+fmt.Printf("s: %v\n", s)
+```
+print:
+```
+s: [1 2 3 4 5 6]
+```
+
+Now, we want get the the type of the slice element, so we can creat a
+temp variable according to this *standard type*. Because we have the 
+reflect.Value type of s, we use Interface() get back the type info,
+then TypeOf() get type info. 
+```
+fmt.Println(reflect.TypeOf(s.Interface()))
+```
+print:
+```
+[]int
+```
+Yes, it is a int slice, *Elem()* on this reflect.Type:
+```
+etype := reflect.TypeOf(s.Interface()).Elem()
+fmt.Println(etype)
+```
+print:
+```
+int
+```
+reflect.New(etype) return a ptr point to value of this type(int)
+so Elem() get the value; finally the for loop do the pow setting.
+run the whole program:
+```
+before:  [1 2 3 4 5 6]
+after:  [1 4 9 16 25 36]
+```
+
+Just do a slice pow, it\'s an overkilling to use reflect. But this 
+is a good example tell us how we can use reflect to get and set our
+own data.
