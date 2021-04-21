@@ -25,7 +25,7 @@ The following is the encoding rule of utf-8:
 + A high-order 11110 indicates the character take 4 bytes
 
 # 2. Golang process UTF-8 string
-First let's inspect a chinese version hello-world.
+First, let's inspect a chinese version *hello-world*:
 ```
 package main
 
