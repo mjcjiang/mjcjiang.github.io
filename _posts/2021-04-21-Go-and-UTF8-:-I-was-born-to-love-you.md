@@ -19,10 +19,10 @@ The following is the encoding rule of utf-8:
 
 ![interface var](/assets/unicode/utf8-internal-encoding.png)<br>
 
-+ A high-order 0 indicates 7-bit ASCII;
-+ A high-order 110 indicates the character take 2 bytes;
-+ A high-order 1110 indicates the character take 3 bytes;
-+ A high-order 11110 indicates the character take 4 bytes;
++ A high-order 0 indicates 7-bit ASCII
++ A high-order 110 indicates the character take 2 bytes
++ A high-order 1110 indicates the character take 3 bytes
++ A high-order 11110 indicates the character take 4 bytes
 
 # 2. Golang process UTF-8 string
 First let's inspect a chinese version hello-world.
