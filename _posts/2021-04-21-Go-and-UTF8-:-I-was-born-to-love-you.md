@@ -1,17 +1,17 @@
-\<\<I was born to love you\>\> is a famous song from Queen, this can be used to
-describe the relationship between go(lang) and utf-8 encoding. Because code 
-of golang is encoded with utf-8, and the string literal in golang is encoded
-with utf-8 two. Go also have a unicode/utf-8 package deal with utf-8 processing.
-Now let's talk about what is UTF-8 and how golang deal with it.
+\<\<I was born to love you\>\> is a famous song from *Queen*, this can be used to
+describe the relationship between go(lang) and utf-8 encoding. Because source code 
+in golang is encoded with utf-8, so is the string literals. Go also have a
+*unicode/utf-8* package to deal with utf-8 processing. Now let's talk about what 
+is UTF-8 and how go(lang) deal with it.
 
 # 1. UTF-8
-As a programmer, the first and the foremost encoding system you know is ACSII(US).
-It's simple and competent, just one byte can encode all the characters(invisible 
-and visible). But as you can see, life is always much complex than what we
-think, the world is full of different characters. As an example, to learn
-english, you just need remember the 24 characters in the alphagrahic chart. If
-you are born to be a chinese man, you have to remember thougthands of characters
-before you can read a column.
+As a programmer, the first and foremost encoding method you know is ACSII(US).
+It's simple and compact, which encode all the characters(invisibles and visibles). 
+But as you can see, life is much more complicated than what we think, the world 
+is full of different characters. As an example, when you read english articals, 
+you just need remember the 24 characters in the alphabet. If you are born to be 
+a chinese man, you will have to remember thousand of characters before you can 
+read a artical. [That's why chinese is so horrible to learn :)]
 
 One byte can't encode this magnificent number of characters in our world. Then
 the unicode come to rescure. UTF-8 is a varible-length encoding of Unicode code
