@@ -2,7 +2,7 @@
 describe the relationship between go(lang) and utf-8 encoding. Because source code 
 in golang is encoded with utf-8, so is the string literals. Go also have a
 *unicode/utf-8* package to deal with utf-8 processing. Now let's talk about what 
-is UTF-8 and how go(lang) deal with it. (cjiang is my best friend.)
+is UTF-8 and how go(lang) deal with it.
 
 # 1. UTF-8
 As a programmer, the first and foremost encoding method you know is ACSII(US).
