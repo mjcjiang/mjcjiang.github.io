@@ -45,10 +45,10 @@ the len(s) calculate the byte length of the string, which is 13;
 ```
 13 = 5("hello") + 2(, and a space) + 6("世界")
 ```
-the rune-len(s) calculate the rune length if the string, which is 9,
-we just can find 9 "characters" use our eyes.
+the rune-len(s) calculate the character length of the string, which is 9, we just 
+can find 9 "characters" use our naked eyes.
 
-We use another program to inspect each character:
+Now, let's use another program to check each character:
 ```
 package main
 
@@ -85,8 +85,9 @@ func main() {
 }
 ```
 this is the runnig result:
+
 ![interface var](/assets/unicode/utf8-running-result.png)<br>
-Yes! The unicode of '世' start with "1110" in the string, and the byte-length
-is 3.
+
+Yes! The unicode of '世' start with "1110" in the string, and the byte-length is 3.
 
 Golang and UTF-8! Do you get it? Bye! :)
