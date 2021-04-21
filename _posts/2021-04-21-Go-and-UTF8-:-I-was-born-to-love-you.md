@@ -1,4 +1,4 @@
-<<I was born to love you>> is a famous song from Queen, this can be used to
+<I was born to love you> is a famous song from Queen, this can be used to
 describe the relationship between go(lang) and utf-8 encoding. Because code 
 of golang is encoded with utf-8, and the string literal in golang is encoded
 with utf-8 two. Go also have a unicode/utf-8 package deal with utf-8 processing.
