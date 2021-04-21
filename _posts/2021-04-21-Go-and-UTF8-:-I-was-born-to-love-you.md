@@ -6,7 +6,7 @@ is UTF-8 and how go(lang) deal with it.
 
 # 1. UTF-8
 As a programmer, the first and foremost encoding method you know is ACSII(US).
-It's simple and compact, which encode all the characters(invisibles and visibles). 
+It's simple and compact, which encode a small set of characters(invisibles and visibles). 
 But as you can see, life is much more complicated than what we think, the world
 is full of different characters. As an example, when you read english articals,
 you just need remember the 24 characters in the alphabet. If you are born to be
