@@ -72,8 +72,8 @@ func main() {
 			fmt.Printf("[values < 128 unused: %s, %c]\n", biVersion, r)
 			i += 2
 		} else if strings.HasPrefix(biVersion, "1110") {
-			r, _ := utf8.DecodeRuneInString(string(s[i:]))
-			fmt.Printf("[values < 2048 unused: %s, %c]\n", biVersion, r)
+            r, size := utf8.DecodeRuneInString(string(s[i:]))
+			fmt.Printf("[values < 2048 unused: %s, %c, size: %d]\n", biVersion, r, size)
 			i += 3
 		} else if strings.HasPrefix(biVersion, "11110") {
 			r, _ := utf8.DecodeRuneInString(string(s[i:]))
