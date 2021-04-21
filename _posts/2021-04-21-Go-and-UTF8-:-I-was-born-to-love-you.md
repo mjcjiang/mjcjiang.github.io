@@ -43,7 +43,7 @@ func main() {
 ```
 the len(s) calculate the byte length of the string, which is 13;
 ```
-13 = 5("hello") + 2(, and the a space) + 6("世界")
+13 = 5("hello") + 2(, and a space) + 6("世界")
 ```
 the rune-len(s) calculate the rune length if the string, which is 9,
 we just can find 9 "characters" use our eyes.
