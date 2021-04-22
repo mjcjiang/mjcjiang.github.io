@@ -41,11 +41,11 @@ func main() {
 	fmt.Println(utf8.RuneCountInString(s))
 }
 ```
-the len(s) calculate the byte length of the string, which is 13;
+the *len(s)* calculate the byte length of the string, which is 13;
 ```
 13 = 5("hello") + 2(, and a space) + 6("世界")
 ```
-the rune-len(s) calculate the character length of the string, which is 9, we just 
+the *utf8.RuneCountInString(s)* calculate the character length of the string, which is 9, we just 
 can find 9 "characters" use our naked eyes.
 
 Now, let's use another program to check each character:
