@@ -45,5 +45,5 @@ type IntSlice struct
 ```
 the follwing is two slices have the same underlying array:
 
-![interface var](/assets/array/rust_array.png)<br>
+![interface var](/assets/array/golang_slice.png)<br>
 
