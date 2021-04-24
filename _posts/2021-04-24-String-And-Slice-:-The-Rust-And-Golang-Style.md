@@ -17,4 +17,15 @@ Array have the following attribute:
 running result:
 
 ![interface var](/assets/array/golang_array.png)<br>
-the array in golang can be changed
+the array in golang can be changed.
+
+```
+    let rs_arr = [1,2,3];
+    println!("{:?}", rs_arr);
+    rs_arr[2] = 4;
+    println!("{:?}", rs_arr);
+```
+running result:
+
+![interface var](/assets/array/rust_array.png)<br>
+the default(no mutable) array in rust can't be changed in runtime.
