@@ -1,4 +1,4 @@
-Array, String and Slice is the basic element of a program in modern high-order
+Array and Slice is the basic element of a program in modern high-order
 programming language, but how different language deal with them? We will inspect
 the Golang and Rust way.
 
@@ -29,3 +29,21 @@ running result:
 
 ![interface var](/assets/array/rust_array.png)<br>
 the default(no mutable) array in rust can't be changed in runtime.
+
+# 2. Slice, the mask on an array
+slice is more like a data struct, which contains:
++ a pointer to the underline array element
++ length of the slice
++ capacity of the slice
+
+```
+type IntSlice struct 
+{
+    ptr   *int
+    len, cap int
+}
+```
+the follwing is two slices have the same underlying array:
+
+![interface var](/assets/array/rust_array.png)<br>
+
