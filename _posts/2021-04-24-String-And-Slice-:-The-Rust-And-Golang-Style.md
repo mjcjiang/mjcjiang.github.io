@@ -15,5 +15,6 @@ Array have the following attribute:
 	fmt.Println(a)
 ```
 running result:
+
 ![interface var](/assets/array/golang_array.png)<br>
 the array in golang can be changed
