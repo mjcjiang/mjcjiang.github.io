@@ -47,3 +47,47 @@ the follwing is two slices have the same underlying array:
 
 ![interface var](/assets/array/golang_slice.png)<br>
 
+A simple program in golang, delete adjecent duplicate word in a string:
+```
+func RemoveAdjacentDuplicateString(s []string) []string {
+	dupnum := 0
+	curpos := 1
+
+	//dup adj never can happen
+	if len(s) <= 1 {
+		return s
+	}
+
+	for curpos < len(s)-dupnum {
+		if s[curpos] == s[curpos-1] {
+			copy(s[curpos-1:], s[curpos:])
+			dupnum++
+		} else {
+			curpos++
+		}
+	}
+
+	return s[:len(s)-dupnum]
+}
+```
+
+# 3. Slice, the rust style
+The following a code sneppet from "The Rust Programming Language".
+```
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+
+```
+&s[0..i] is a slice reference to string.
+
+# 4. Summary
+Slice is more generally used than array, use it! :)
