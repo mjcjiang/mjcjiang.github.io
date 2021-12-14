@@ -224,7 +224,8 @@ Resources:
 Endpoint Mode:  vip
 ```
 Ha！Look at the *UpdateStatus*, they tell the update result!
-Use service ps get the update trace:
+
+Use *service ps* get the update trace:
 ``` bash
 sudo docker service ps redis
 ID             NAME          IMAGE         NODE             DESIRED STATE   CURRENT STATE            ERROR     PORTS
