@@ -233,7 +233,7 @@ ContainerSpec:
 Resources:
 Endpoint Mode:  vip
 ```
-Ha！Look at the *UpdateStatus*, they tell the update result!
+Ha锛丩ook at the *UpdateStatus*, they tell the update result!
 
 Use *service ps* get the update trace:
 ``` bash
