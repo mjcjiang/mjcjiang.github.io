@@ -4,6 +4,7 @@ take a journey to create a swarm cluster of 3 nodes, then:
 * create service to check task schedule;
 * scale service to add plasticity to the service;
 * service rolling update;
+
 Fasten Seat Belt*, let's go!!
 
 # 1.create a swarm on manager node

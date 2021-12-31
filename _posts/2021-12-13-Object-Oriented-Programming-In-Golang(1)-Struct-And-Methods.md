@@ -158,7 +158,7 @@ type IntSet []uint64
 ```
 Now IntSet is a type alias of []uint64, we can add all the mothods(Add, Remove...) on it.
 
-But it lost the *Encapsulation*. Now client can change it directly! We say that life isa
+But it lost the *Encapsulation*. Now client can change it directly! We say that life is
 a balance. When you design a API, it is your duty to decide *Encapsulation* or *NoEncapsulation*.
 Have a nice day! :)
 
