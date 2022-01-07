@@ -120,7 +120,7 @@ mprof plot --flame
 ```
 
 This is the memory profile graph:
-![mem_profile_graph](./pics/memprofile/mem_profile.png)
+![mem_profile_graph](./asserts/memprof/mem_profile.png)
 
 # 5. Epilogue:
 Memory profile can be very slow if your program's memory-usage is high. But
