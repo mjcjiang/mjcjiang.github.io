@@ -5,7 +5,9 @@ you can see the change in a time-line mode, to get a big picture of the memory-u
 the program's lifetime. Do memory profiling could be very slow compare to cpu profiling, be careful! 
 
 # 1. Package install:
+``` bash
 pip install -U memory_profiler
+```
 
 # 2. Profile line-by-line memory usage:
 Example Code: mem_prifile.py
