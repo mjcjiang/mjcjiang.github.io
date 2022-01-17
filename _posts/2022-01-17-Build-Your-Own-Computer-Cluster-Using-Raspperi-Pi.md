@@ -13,4 +13,4 @@ a hacking soul. In this article, we will travel along the road to build a *Raspb
 * One *Raspberry-Pi* stackble case capable of holding 4 Pis -- $10
 
 Use your toolset, construct out the cluster:
-![cluster photo](/asserts/cluster_build/my_cluster.jpg)
+![clusterphoto](/assets/cluster_build/my_cluster.jpg)
