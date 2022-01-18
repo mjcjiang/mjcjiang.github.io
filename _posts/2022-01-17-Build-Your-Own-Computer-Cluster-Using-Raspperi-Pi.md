@@ -22,7 +22,6 @@ the sd cards into the 4 *Raspberry-Pi*. You can find many tutorial on the intern
 
 # 3. Config master node into a DHCP server
 Each node(a *Raspberry-Pi* card) should have its own ip in the cluster, so we will config the master node as the dhcp server.
-
 ## 3.1 Set master node network interface
 Edit /etc/network/interfaces.d/eth0 on master node, if not have this file, create a new file(use sudo):
 ``` bash
@@ -55,7 +54,6 @@ After all this editing, you can run
 sudo reboot
 ```
 to reboot the mechine, then master node will have the static ip 10.0.0.1.
-
 ## 3.2 DHCP server install
 Run the following command:
 ``` bash
