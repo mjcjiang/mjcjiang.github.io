@@ -19,8 +19,10 @@ my cluster:
 # 2. Sofeware prepare
 Use a laptop to burn *Raspberry Pi OS*(https://www.raspberrypi.com/software) into the 4 SDHC card, then plug
 the sd cards into the 4 *Raspberry-Pi*. You can find many tutorial on the internet. I just pass it over now!
+
 # 3. Config master node into a DHCP server
 Each node(a *Raspberry-Pi* card) should have its own ip in the cluster, so we will config the master node as the dhcp server.
+
 ## 3.1 Set master node network interface
 Edit /etc/network/interfaces.d/eth0 on master node, if not have this file, create a new file(use sudo):
 ``` bash
@@ -93,15 +95,18 @@ Finally, restart isc-dhcp-server:
 ``` bash
 sudo systemctl restart isc-dhcp-server
 ```
-	Plug the remain 3 *Raspberry-Pi* card to the Ethenet switch, they will get their specific ip.
+Plug the remain 3 *Raspberry-Pi* card to the Ethenet switch, they will get their specific ip.
+
 # 4. NAT and iptables setting
 The final step is setting network address translation(NAT) so that the worker nodes can reach
 the public internet.
+
 ## 4.1 Enable ip forwarding
 Edit /etc/sysctl.conf:
 ``` bash
 net.ipv4.ip_forward=1
 ```
+
 ## 4.2 Reset iptables:
 Execute the following script(make sure iptables is installed): 
 ``` bash
@@ -167,6 +172,7 @@ ACCEPT     all  --  anywhere             anywhere
 Chain OUTPUT (policy ACCEPT)
 target     prot opt source               destination 
 ```
+
 ## 4.4 Save new iptables rules
 ``` bash
 sudo iptables-save > dump.txt
@@ -241,8 +247,6 @@ sudo chmod +x /etc/init.d/setuproutings
 sudo systemctl enable setuproutings
 sudo systemctl start setuproutings
 ```
-
-
 
 # 6. Epilogue:
 Build a cluster from bare mental is a great challeage, but it is a great fun when you finish it! Good Luck!
